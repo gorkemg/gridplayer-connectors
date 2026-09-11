@@ -1,0 +1,80 @@
+{
+  "id": "plex",
+  "name": "Plex",
+  "version": 2,
+  "transport": "rest",
+  "auth": {
+    "type": "header",
+    "headerName": "X-Plex-Token",
+    "extraHeaders": {
+      "Accept": "application/json",
+      "X-Plex-Client-Identifier": "gridplayer-app",
+      "X-Plex-Product": "GridPlayer",
+      "X-Plex-Device-Name": "GridPlayer"
+    },
+    "login": null,
+    "queryParamName": "X-Plex-Token"
+  },
+  "metadataLookup": null,
+  "browse": {
+    "rest": {
+      "listing": {
+        "listRequest": {
+          "method": "GET",
+          "path": "library/sections/{sectionId}/all",
+          "query": {
+            "title": "{searchText}",
+            "actor": "{actorId}",
+            "sort": "{sortField}:{sortDirection}",
+            "X-Plex-Container-Size": "500"
+          }
+        },
+        "itemsPath": "MediaContainer.Metadata",
+        "itemMapping": {
+          "id": "ratingKey",
+          "title": "title",
+          "durationPath": "duration",
+          "durationDivisor": 1000,
+          "fileSizePath": "Media[0].Part[0].size",
+          "screenshotURLPath": "thumb",
+          "streamURLPath": "Media[0].Part[0].key",
+          "castPath": "Role[].tag",
+          "tagsPath": "Genre[].tag",
+          "chapters": null,
+          "typePath": "type"
+        },
+        "sortFieldMap": { "name": "titleSort", "date": "addedAt" }
+      },
+      "streamRequest": { "method": "GET", "path": "library/metadata/{id}", "query": null },
+      "imageRequest": null
+    },
+    "graphql": null,
+    "categories": [
+      {
+        "label": "Libraries",
+        "expandInSidebar": true,
+        "rest": {
+          "listRequest": { "method": "GET", "path": "library/sections", "query": null },
+          "itemsPath": "MediaContainer.Directory",
+          "itemMapping": { "id": "key", "title": "title" }
+        },
+        "graphql": null,
+        "selectionContextKey": "sectionId"
+      },
+      {
+        "label": "Actors",
+        "expandInSidebar": false,
+        "rest": {
+          "listRequest": { "method": "GET", "path": "library/sections/{sectionId}/actor", "query": null },
+          "itemsPath": "MediaContainer.Directory",
+          "itemMapping": { "id": "key", "title": "title" }
+        },
+        "graphql": null,
+        "selectionContextKey": "actorId",
+        "dependsOnContextKey": "sectionId"
+      }
+    ],
+    "containerTypeValues": null
+  },
+  "tagsLookup": null
+}
