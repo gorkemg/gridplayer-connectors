@@ -1,7 +1,7 @@
 {
   "id": "plex",
   "name": "Plex",
-  "version": 2,
+  "version": 3,
   "transport": "rest",
   "auth": {
     "type": "header",
@@ -26,6 +26,7 @@
             "title": "{searchText}",
             "actor": "{actorId}",
             "sort": "{sortField}:{sortDirection}",
+            "userRating>=": "{minRating}",
             "X-Plex-Container-Size": "500"
           }
         },
@@ -41,7 +42,9 @@
           "castPath": "Role[].tag",
           "tagsPath": "Genre[].tag",
           "chapters": null,
-          "typePath": "type"
+          "typePath": "type",
+          "ratingPath": "userRating",
+          "ratingDivisor": 2
         },
         "sortFieldMap": { "name": "titleSort", "date": "addedAt" }
       },
@@ -49,6 +52,26 @@
       "imageRequest": null
     },
     "graphql": null,
+    "itemDetail": {
+      "rest": {
+        "request": { "method": "GET", "path": "library/metadata/{id}", "query": null },
+        "itemPath": "MediaContainer.Metadata[0]",
+        "itemMapping": {
+          "id": "ratingKey",
+          "title": "title",
+          "durationPath": "duration",
+          "durationDivisor": 1000,
+          "fileSizePath": "Media[0].Part[0].size",
+          "screenshotURLPath": "thumb",
+          "streamURLPath": "Media[0].Part[0].key",
+          "castPath": "Role[].tag",
+          "tagsPath": "Genre[].tag",
+          "chapters": null,
+          "ratingPath": "userRating",
+          "ratingDivisor": 2
+        }
+      }
+    },
     "categories": [
       {
         "label": "Libraries",
@@ -74,7 +97,15 @@
         "dependsOnContextKey": "sectionId"
       }
     ],
-    "containerTypeValues": null
+    "containerTypeValues": null,
+    "maxRatingFilter": 5,
+    "ratingFilterScale": 2
+  },
+  "actions": {
+    "rate": {
+      "rest": { "method": "PUT", "path": ":/rate", "query": { "key": "{id}", "identifier": "com.plexapp.plugins.library", "rating": "{value}" } }
+    },
+    "rateValueScale": 2
   },
   "tagsLookup": null
 }
