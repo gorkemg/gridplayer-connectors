@@ -44,7 +44,15 @@
           "chapters": null,
           "typePath": "type",
           "ratingPath": "userRating",
-          "ratingDivisor": 2
+          "ratingDivisor": 2,
+          "coverURLPath": "art",
+          "videoCodecPath": "Media[0].videoCodec",
+          "audioCodecPath": "Media[0].audioCodec",
+          "bitratePath": "Media[0].bitrate",
+          "bitrateDivisor": 0.001,
+          "frameRatePath": "Media[0].videoFrameRate",
+          "widthPath": "Media[0].width",
+          "heightPath": "Media[0].height"
         },
         "sortFieldMap": { "name": "titleSort", "date": "addedAt" }
       },
@@ -68,7 +76,15 @@
           "tagsPath": "Genre[].tag",
           "chapters": null,
           "ratingPath": "userRating",
-          "ratingDivisor": 2
+          "ratingDivisor": 2,
+          "coverURLPath": "art",
+          "videoCodecPath": "Media[0].videoCodec",
+          "audioCodecPath": "Media[0].audioCodec",
+          "bitratePath": "Media[0].bitrate",
+          "bitrateDivisor": 0.001,
+          "frameRatePath": "Media[0].videoFrameRate",
+          "widthPath": "Media[0].width",
+          "heightPath": "Media[0].height"
         }
       }
     },
