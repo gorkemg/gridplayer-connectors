@@ -1,0 +1,52 @@
+{
+  "id": "tmdb",
+  "name": "TMDB",
+  "version": 5,
+  "transport": "rest",
+  "auth": {
+    "type": "header",
+    "headerName": "Authorization",
+    "extraHeaders": null,
+    "login": null,
+    "queryParamName": null,
+    "headerValuePrefix": "Bearer "
+  },
+  "metadataLookup": {
+    "dialects": null,
+    "rest": {
+      "searchRequest": {
+        "method": "GET",
+        "path": "search/movie",
+        "query": { "query": "{title}", "year": "{year}" }
+      },
+      "resultsPath": "results",
+      "resultIDPath": "id",
+      "resultTypePath": null,
+      "resultTypeMap": null,
+      "detail": {
+        "rest": {
+          "request": {
+            "method": "GET",
+            "path": "movie/{id}",
+            "query": { "append_to_response": "credits" }
+          },
+          "itemPath": null,
+          "itemMapping": {
+            "id": "id",
+            "title": "title",
+            "castPath": "credits.cast[].name",
+            "tagsPath": "genres[].name"
+          }
+        },
+        "graphql": null
+      }
+    }
+  },
+  "browse": null,
+  "tagsLookup": null,
+  "actions": null,
+  "attribution": {
+    "notice": "This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.",
+    "url": "https://www.themoviedb.org"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "thetvdb",
+  "name": "TheTVDB",
+  "version": 5,
+  "transport": "rest",
+  "auth": {
+    "type": "login",
+    "headerName": "Authorization",
+    "extraHeaders": null,
+    "login": {
+      "path": "login",
+      "usernameField": "pin",
+      "passwordField": "apikey",
+      "tokenResponsePath": "data.token",
+      "userIDResponsePath": null
+    },
+    "queryParamName": null,
+    "headerValuePrefix": "Bearer "
+  },
+  "metadataLookup": {
+    "dialects": null,
+    "rest": {
+      "searchRequest": {
+        "method": "GET",
+        "path": "search",
+        "query": { "query": "{title}", "year": "{year}" }
+      },
+      "resultsPath": "data",
+      "resultIDPath": "tvdb_id",
+      "resultTypePath": "type",
+      "resultTypeMap": { "movie": "movies", "series": "series" },
+      "detail": {
+        "rest": {
+          "request": {
+            "method": "GET",
+            "path": "{type}/{id}/extended",
+            "query": null
+          },
+          "itemPath": "data",
+          "itemMapping": {
+            "id": "id",
+            "title": "name",
+            "castPath": "characters[].personName",
+            "tagsPath": "genres[].name"
+          }
+        },
+        "graphql": null
+      }
+    }
+  },
+  "browse": null,
+  "tagsLookup": null,
+  "actions": null,
+  "attribution": {
+    "notice": "Metadata provided by TheTVDB.com.",
+    "url": "https://www.thetvdb.com"
+  }
+}
