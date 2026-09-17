@@ -95,7 +95,7 @@
         "rest": {
           "listRequest": { "method": "GET", "path": "library/sections", "query": null },
           "itemsPath": "MediaContainer.Directory",
-          "itemMapping": { "id": "key", "title": "title" }
+          "itemMapping": { "id": "key", "title": "title", "screenshotURLPath": "composite" }
         },
         "graphql": null,
         "selectionContextKey": "sectionId"
@@ -104,9 +104,14 @@
         "label": "Actors",
         "expandInSidebar": false,
         "rest": {
-          "listRequest": { "method": "GET", "path": "library/sections/{sectionId}/actor", "query": null },
+          "listRequest": {
+            "method": "GET",
+            "path": "library/sections/{sectionId}/actor",
+            "query": { "X-Plex-Container-Start": "{startIndex}", "X-Plex-Container-Size": "{perPage}" }
+          },
           "itemsPath": "MediaContainer.Directory",
-          "itemMapping": { "id": "key", "title": "title" }
+          "totalCountPath": "MediaContainer.totalSize",
+          "itemMapping": { "id": "key", "title": "title", "screenshotURLPath": "thumb" }
         },
         "graphql": null,
         "selectionContextKey": "actorId",
