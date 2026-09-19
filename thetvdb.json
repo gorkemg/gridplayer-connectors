@@ -1,7 +1,7 @@
 {
   "id": "thetvdb",
   "name": "TheTVDB",
-  "version": 5,
+  "version": 6,
   "transport": "rest",
   "auth": {
     "type": "login",
@@ -40,7 +40,7 @@
           "itemMapping": {
             "id": "id",
             "title": "name",
-            "castPath": "characters[].personName",
+            "castPath": "characters[peopleType=Actor].personName",
             "tagsPath": "genres[].name"
           }
         },
