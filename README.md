@@ -22,7 +22,12 @@ GridPlayer's own settings; nothing here embeds one.
 
 ## Available connectors
 
-- [`plex.json`](plex.json) — Plex Media Server
+- [`plex.json`](plex.json) — Plex Media Server. Files GridPlayer can't play
+  directly (MKV, WebM, AVI, …) are streamed through Plex's HLS transcoder
+  instead, which copies the streams where it can (connector format v8, used
+  by GridPlayer 1.4 and later; older builds ignore it and play the original
+  file as before). Plex's HLS uses MPEG-TS segments, so HEVC video in such a
+  file may be transcoded to H.264 by your server rather than copied.
 - [`tmdb.json`](tmdb.json) — [TMDB](https://www.themoviedb.org) (title
   metadata only, no browsing). Server URL: `https://api.themoviedb.org/3`.
   API key: a personal, free "Developer" API key from your own TMDB account's
